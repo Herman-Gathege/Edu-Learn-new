@@ -1,5 +1,5 @@
-for the backend use flask run
-for the frontend use npm start
+1:for the backend use flask run
+2:for the frontend use npm start
 
 features include:
 1:user authentication
