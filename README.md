@@ -2,12 +2,12 @@ for the backend use flask run
 for the frontend use npm start
 
 features include:
-user authentication
-users can create a course
-users can read a course
+1:user authentication
+2:users can create a course
+3:users can read a course
 
 future implimentations:
-adding to favourite
-commenting on course
-sharing course
-editing course
+1:adding to favourite
+2:commenting on course
+3:sharing course
+4:editing course
