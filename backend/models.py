@@ -36,7 +36,8 @@ class User(db.Model, UserMixin):  # Inherit from UserMixin
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(300), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    # description = db.Column(db.String(300), nullable=False)
     content = db.Column(db.Text, nullable=False)  # New column for course content
     
     def __repr__(self):
