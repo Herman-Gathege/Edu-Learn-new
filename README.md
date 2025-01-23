@@ -10,9 +10,12 @@ Install dependencies:
 pip install -r requirements.txt
 Run the backend server:
 
+<<<<<<< HEAD
 activate venv:source venv/bin/activate
 
 
+=======
+>>>>>>> 4706841b75f0c4ca84d8753873164296ecd4778d
 
 flask run
 The backend API will be available at:
@@ -55,4 +58,8 @@ Share Course
 Users will be able to share courses with others.
 
 Edit Course
+<<<<<<< HEAD
 Users will be able to edit courses they have created.
+=======
+Users will be able to edit courses they have created.
+>>>>>>> 4706841b75f0c4ca84d8753873164296ecd4778d
