@@ -10,6 +10,9 @@ Install dependencies:
 pip install -r requirements.txt
 Run the backend server:
 
+activate venv:source venv/bin/activate
+
+
 
 flask run
 The backend API will be available at:
