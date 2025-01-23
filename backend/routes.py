@@ -74,7 +74,7 @@ def login():
         try:
             if bcrypt.check_password_hash(user.password, password):
                 access_token = create_access_token(identity=user.id)
-                print(f"Generated token: {access_token}")  # Debug: Print token
+                # print(f"Generated token: {access_token}")  # Debug: Print token
                 return jsonify({"message": "Login successful", "access_token": access_token}), 200
             else:
                 return jsonify({"error": "Incorrect password, try again."}), 400
