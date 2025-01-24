@@ -16,7 +16,7 @@ const Login = () => {
         const userCredentials = { email, password };
 
         try {
-            const response = await axios.post('http://localhost:5000/auth/login', userCredentials);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, userCredentials);
 
             if (response.data.access_token) {
                 // Update the context to reflect authentication

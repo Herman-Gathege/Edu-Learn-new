@@ -28,7 +28,7 @@ function Signup() {
 
         // Send the form data to the backend
         try {
-            const res = await axios.post('http://localhost:5000/auth/signup', data);
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, data);
             alert(res.data.message); // Show success message
             navigate('/login'); // Redirect to the home page
         } catch (error) {

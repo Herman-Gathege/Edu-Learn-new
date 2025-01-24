@@ -18,7 +18,8 @@ function AddCourse() {
         };
 
         try {
-            const res = await axios.post('http://localhost:5000/api/courses', newCourse);
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/courses`, newCourse);
+
             console.log(res.data);
             // Redirect to the courses list page after successful submission
             navigate('/courses');  // Use navigate() instead of navigate.push()
