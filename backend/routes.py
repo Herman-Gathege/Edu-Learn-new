@@ -49,15 +49,24 @@ auth_routes = Blueprint('auth', __name__)
 #             print(f"Error in signup route: {e}")
 #             return jsonify({"error": "An error occurred during signup."}), 500
 
-@auth_routes.route('/signup', methods=['OPTIONS','POST'])
+@auth_routes.route('/signup', methods=['OPTIONS', 'POST'])
 def signup():
+    if request.method == 'OPTIONS':
+        # This handles the preflight request
+        response = jsonify({"message": "Preflight check"})
+        response.headers.add("Access-Control-Allow-Origin", "http://localhost:3000")
+        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
+        response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+        return response, 200
+
+    # Handle POST request here
     try:
         data = request.get_json()
 
         if not data:
             return jsonify({"error": "No data provided"}), 400
 
-        # Extracting form fields
+        # Your existing signup logic
         email = data.get('email')
         name = data.get('name')
         password1 = data.get('password1')
@@ -89,17 +98,13 @@ def signup():
             db.session.commit()  # Commit the transaction to the database
         except Exception as db_error:
             db.session.rollback()  # Rollback in case of error
-            print(f"Database error: {db_error}")
-            return jsonify({"error": "An error occurred while saving the user."}), 500
-
-        # Optionally, log in the user if you're using session-based authentication
-        login_user(new_user, remember=True)
+            return jsonify({"error": "Database error occurred"}), 500
 
         return jsonify({"message": "User created successfully"}), 201
 
     except Exception as e:
-        print(f"Error in signup route: {e}")
         return jsonify({"error": "An error occurred during signup."}), 500
+
 
 
 

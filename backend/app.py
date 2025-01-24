@@ -29,8 +29,9 @@ frontend_url = os.getenv('REACT_APP_URL')
 
 # Use dynamic frontend URL in CORS configuration
 # CORS(app, origins=[frontend_url, "http://localhost:3000"])
-# CORS(app, origins=[frontend_url, "http://localhost:3000"])
-CORS(app, resources={r"/*": {"origins": "https://edu-learn-new-1.onrender.com"}})
+CORS(app, origins=[frontend_url, "http://localhost:3000"])
+# CORS(app, resources={r"/*": {"origins": ["https://edu-learn-new.onrender.com", "http://localhost:3000"]}})
+# CORS(app)  # Allow all origins (for debugging only, not recommended for production)
 
 
 migrate = Migrate(app, db)
