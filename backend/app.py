@@ -38,14 +38,12 @@ migrate = Migrate(app, db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+from routes import auth_routes
+from courses import courses_routes
 
+app.register_blueprint(auth_routes, url_prefix='/auth')
+app.register_blueprint(courses_routes, url_prefix='/api')
 
-if __name__ == "__main__":
-    
-    from routes import auth_routes
-    from courses import courses_routes
-
-    app.register_blueprint(auth_routes, url_prefix='/auth')
-    app.register_blueprint(courses_routes, url_prefix='/api')
+if __name__ == "__main__":   
 
     app.run(debug=True)

@@ -49,7 +49,7 @@ auth_routes = Blueprint('auth', __name__)
 #             print(f"Error in signup route: {e}")
 #             return jsonify({"error": "An error occurred during signup."}), 500
 
-@auth_routes.route('/signup', methods=['POST'])
+@auth_routes.route('/signup', methods=['OPTIONS','POST'])
 def signup():
     try:
         data = request.get_json()
@@ -103,7 +103,7 @@ def signup():
 
 
 
-@auth_routes.route('/login', methods=['OPTIONS','POST'])
+@auth_routes.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
 
