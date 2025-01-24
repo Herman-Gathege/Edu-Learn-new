@@ -19,7 +19,7 @@ jwt = JWTManager(app)
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-frontend_url = os.getenv('REACT_APP_API_URL')  # Add this line to read the frontend URL from .env
+frontend_url = os.getenv('REACT_APP_URL')  # Add this line to read the frontend URL from .env
 CORS(app, origins=[frontend_url, "http://localhost:3000"])
 migrate = Migrate(app, db)
 
