@@ -103,7 +103,7 @@ def signup():
 
 
 
-@auth_routes.route('/login', methods=['POST'])
+@auth_routes.route('/login', methods=['OPTIONS','POST'])
 def login():
     data = request.get_json()
 
