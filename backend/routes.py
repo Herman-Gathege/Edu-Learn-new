@@ -54,7 +54,7 @@ def signup():
     if request.method == 'OPTIONS':
         # This handles the preflight request
         response = jsonify({"message": "Preflight check"})
-        response.headers.add("Access-Control-Allow-Origin", "http://localhost:3000")
+        response.headers.add("Access-Control-Allow-Origin", "https://edu-learn-new-1.onrender.com")
         response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
         response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
         return response, 200
