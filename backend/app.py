@@ -28,7 +28,9 @@ bcrypt = Bcrypt(app)
 frontend_url = os.getenv('REACT_APP_URL')
 
 # Use dynamic frontend URL in CORS configuration
+# CORS(app, origins=[frontend_url, "http://localhost:3000"])
 CORS(app, origins=[frontend_url, "http://localhost:3000"])
+
 
 migrate = Migrate(app, db)
 
