@@ -19,18 +19,30 @@ jwt = JWTManager(app)
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-frontend_url = os.getenv('REACT_APP_URL')  # Add this line to read the frontend URL from .env
+
+# frontend_url = os.getenv('REACT_APP_URL')  # Add this line to read the frontend URL from .env
+# CORS(app, origins=["https://edu-learn-new-1.onrender.com", "http://localhost:3000"])
+
+
+# Get the frontend URL from environment variable
+frontend_url = os.getenv('REACT_APP_URL')
+
+# Use dynamic frontend URL in CORS configuration
 CORS(app, origins=[frontend_url, "http://localhost:3000"])
+
 migrate = Migrate(app, db)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-from routes import auth_routes
-from courses import courses_routes
 
-app.register_blueprint(auth_routes, url_prefix='/auth')
-app.register_blueprint(courses_routes, url_prefix='/api')
 
 if __name__ == "__main__":
+    
+    from routes import auth_routes
+    from courses import courses_routes
+
+    app.register_blueprint(auth_routes, url_prefix='/auth')
+    app.register_blueprint(courses_routes, url_prefix='/api')
+
     app.run(debug=True)

@@ -9,18 +9,64 @@ from models import User
 auth_routes = Blueprint('auth', __name__)
 
 # Routes
+# @auth_routes.route('/signup', methods=['POST'])
+# def signup():
+#     data = request.get_json()
+
+#     # Extracting form fields
+#     email = data.get('email')
+#     name = data.get('name')
+#     password1 = data.get('password1')
+#     password2 = data.get('password2')
+
+#     # Validations
+#     try:
+#         if User.query.filter_by(email=email).first():
+#             return jsonify({"error": "Email already exists."}), 400
+#         elif len(email) < 4:
+#             return jsonify({"error": "Email must be greater than 3 characters."}), 400
+#         elif len(name) < 2:
+#             return jsonify({"error": "Name must be greater than 1 character."}), 400
+#         elif password1 != password2:
+#             return jsonify({"error": "Passwords don't match."}), 400
+#         elif len(password1) < 7:
+#             return jsonify({"error": "Password must be at least 7 characters."}), 400
+
+#         # Hashing password
+#         hashed_password = bcrypt.generate_password_hash(password1).decode('utf-8')
+
+#         # Creating user
+#         new_user = User(name=name, email=email, password=hashed_password)
+#         db.session.add(new_user)
+#         db.session.commit()
+
+#         # Logging in the user
+#         login_user(new_user, remember=True)
+
+#         return jsonify({"message": "User created successfully"}), 201
+
+#     except Exception as e:
+#             print(f"Error in signup route: {e}")
+#             return jsonify({"error": "An error occurred during signup."}), 500
+
 @auth_routes.route('/signup', methods=['POST'])
 def signup():
-    data = request.get_json()
-
-    # Extracting form fields
-    email = data.get('email')
-    name = data.get('name')
-    password1 = data.get('password1')
-    password2 = data.get('password2')
-
-    # Validations
     try:
+        data = request.get_json()
+
+        if not data:
+            return jsonify({"error": "No data provided"}), 400
+
+        # Extracting form fields
+        email = data.get('email')
+        name = data.get('name')
+        password1 = data.get('password1')
+        password2 = data.get('password2')
+
+        # Validations
+        if not email or not name or not password1 or not password2:
+            return jsonify({"error": "All fields are required."}), 400
+
         if User.query.filter_by(email=email).first():
             return jsonify({"error": "Email already exists."}), 400
         elif len(email) < 4:
@@ -38,16 +84,22 @@ def signup():
         # Creating user
         new_user = User(name=name, email=email, password=hashed_password)
         db.session.add(new_user)
-        db.session.commit()
 
-        # Logging in the user
+        try:
+            db.session.commit()  # Commit the transaction to the database
+        except Exception as db_error:
+            db.session.rollback()  # Rollback in case of error
+            print(f"Database error: {db_error}")
+            return jsonify({"error": "An error occurred while saving the user."}), 500
+
+        # Optionally, log in the user if you're using session-based authentication
         login_user(new_user, remember=True)
 
         return jsonify({"message": "User created successfully"}), 201
 
     except Exception as e:
-            print(f"Error in signup route: {e}")
-            return jsonify({"error": "An error occurred during signup."}), 500
+        print(f"Error in signup route: {e}")
+        return jsonify({"error": "An error occurred during signup."}), 500
 
 
 
