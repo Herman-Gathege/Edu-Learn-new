@@ -97,8 +97,8 @@ function Courses() {
                                 <p className="card-text">{course.description}</p>
                                 <button 
                                     onClick={() => handleLearnMore(course.id)} 
-                                    className="btn btn-primary">
-                                    Learn More
+                                    className="btn btn-primary bg-red mb-4 ">
+                                    Start Learning
                                 </button>
                             </div>
                         </div>

@@ -99,7 +99,7 @@ function CourseDetail() {
             <p>{course.projectTitle}</p>
             <p>{course.projectObjective}</p>
 
-            <Link to="/courses" className="btn btn-secondary mb-4">
+            <Link to="/courses" className="btn btn-primary mb-4">
                 Back to Courses
             </Link>
         </div>
