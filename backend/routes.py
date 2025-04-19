@@ -8,46 +8,7 @@ from models import User
 # Auth routes
 auth_routes = Blueprint('auth', __name__)
 
-# Routes
-# @auth_routes.route('/signup', methods=['POST'])
-# def signup():
-#     data = request.get_json()
 
-#     # Extracting form fields
-#     email = data.get('email')
-#     name = data.get('name')
-#     password1 = data.get('password1')
-#     password2 = data.get('password2')
-
-#     # Validations
-#     try:
-#         if User.query.filter_by(email=email).first():
-#             return jsonify({"error": "Email already exists."}), 400
-#         elif len(email) < 4:
-#             return jsonify({"error": "Email must be greater than 3 characters."}), 400
-#         elif len(name) < 2:
-#             return jsonify({"error": "Name must be greater than 1 character."}), 400
-#         elif password1 != password2:
-#             return jsonify({"error": "Passwords don't match."}), 400
-#         elif len(password1) < 7:
-#             return jsonify({"error": "Password must be at least 7 characters."}), 400
-
-#         # Hashing password
-#         hashed_password = bcrypt.generate_password_hash(password1).decode('utf-8')
-
-#         # Creating user
-#         new_user = User(name=name, email=email, password=hashed_password)
-#         db.session.add(new_user)
-#         db.session.commit()
-
-#         # Logging in the user
-#         login_user(new_user, remember=True)
-
-#         return jsonify({"message": "User created successfully"}), 201
-
-#     except Exception as e:
-#             print(f"Error in signup route: {e}")
-#             return jsonify({"error": "An error occurred during signup."}), 500
 
 @auth_routes.route('/signup', methods=['OPTIONS', 'POST'])
 def signup():
@@ -118,15 +79,7 @@ def login():
     # Extracting form fields
     user = User.query.filter_by(email=email).first()
 
-    # if user:
-    #     # Check if password matches
-    #     if bcrypt.check_password_hash(user.password, password):
-    #         access_token = create_access_token(identity=user.id)
-    #         return jsonify({"message": "Login successful", "access_token": access_token}), 200
-    #     else:
-    #         return jsonify({"error": "Incorrect password, try again."}), 400
-    # else:
-    #     return jsonify({"error": "Email does not exist."}), 400
+   
     if user:
         try:
             if bcrypt.check_password_hash(user.password, password):

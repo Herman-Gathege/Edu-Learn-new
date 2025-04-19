@@ -66,7 +66,9 @@ login_manager.init_app(app)
 
 # CORS setup with dynamic frontend URL from .env
 frontend_url = app.config['REACT_APP_URL']  # Use the value from config.py
-CORS(app, origins=[frontend_url, "http://localhost:3000"])
+# CORS(app, origins=[frontend_url, "http://localhost:3000"])
+CORS(app, origins=[frontend_url, "http://localhost:3000"], supports_credentials=True)
+
 
 # Register your blueprints
 from routes import auth_routes
