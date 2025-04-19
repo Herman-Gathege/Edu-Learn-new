@@ -4,6 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 function EditCourse() {
     const { id } = useParams(); // Get course ID from the URL
+    console.log("Course ID from URL:", id); // 🔍 Should NOT be undefined
+
     const navigate = useNavigate();
 
     const [course, setCourse] = useState({
