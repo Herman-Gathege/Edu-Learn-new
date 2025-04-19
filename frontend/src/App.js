@@ -10,6 +10,9 @@ import AddCourse from "./components/AddCourse";
 import CourseDetail from "./components/CourseDetails";
 import Footer from "./components/Footer";
 import ContactUs from "./components/ContactUs";
+import EditCourse from './components/EditCourse'; // Adjust path as needed
+
+
 
 
 function App() {
@@ -25,6 +28,7 @@ function App() {
             <Route path="/courses/:courseId" element={<CourseDetail />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/add-course" element={<AddCourse />} />{" "}
+            <Route path="/edit-course/:courseId" element={<EditCourse />} />
             {/* Add route for the add course page */}
             <Route path="/contact" element={<ContactUs />} />
           </Routes>
